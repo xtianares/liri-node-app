@@ -1,2 +1,2 @@
-# liri
+# LIRI
 Node Application
