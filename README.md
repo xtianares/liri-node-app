@@ -1,2 +1,2 @@
-# LIRI
+# LIRI Bot
 Node Application
