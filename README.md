@@ -1,2 +1,2 @@
 # LIRI Bot
-Node Application
+A SIRI wanna be node application.
