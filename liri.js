@@ -15,25 +15,31 @@ const runCommand = (userCommand, commandInfo) => {
         case 'concert-this':
             // console.log(userCommand);
             // console.log(commandInfo);
+            logIt(userCommand + ' ' + commandInfo);
             concertThis(commandInfo);
             break;
         case 'spotify-this-song':
             // console.log(userCommand);
             // console.log(commandInfo);
+            logIt(userCommand + ' ' + commandInfo);
             spotifyThis(commandInfo);
             break;
         case 'movie-this':
             // console.log(userCommand);
             // console.log(commandInfo);
+            logIt(userCommand + ' ' + commandInfo);
             movieThis(commandInfo);
             break;
         case 'do-what-it-says':
             // console.log(userCommand);
             // console.log(commandInfo);
+            logIt(userCommand + ' ' + commandInfo);
             doThis(commandInfo);
             break;
         default:
             console.log("I don't know what you mean by that, please check the documentation.");
+            logIt(userCommand + ' ' + commandInfo);
+            logIt("I don't know what you mean by that, please check the documentation.");
             break;
     }
 }
@@ -99,6 +105,16 @@ const doThis = () => {
         runCommand(info[0], info[1]);
     });
 }
+const logIt = (log) => {
+    fs.appendFile('log.txt', log + '\r\n', (err) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log("Log file updated!");
+        }
+    });
+}
 
 // Prompt the user to provide command
 inquirer.prompt([
@@ -113,7 +129,7 @@ inquirer.prompt([
     let userInput = response.command.split(' '),
         userCommand = userInput.shift(),
         commandInfo = userInput.join('+');
-        
+
     runCommand(userCommand, commandInfo);
     // console.log(userCommand);
     // console.log(commandInfo);
