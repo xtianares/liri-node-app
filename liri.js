@@ -30,6 +30,11 @@ const runCommand = (userCommand, commandInfo) => {
             // console.log(commandInfo);
             movieThis(commandInfo);
             break;
+        case 'do-what-it-says':
+            // console.log(userCommand);
+            // console.log(commandInfo);
+            doThis(commandInfo);
+            break;
         default:
             console.log("I don't know what you mean by that, please check the documentation.");
             break;
@@ -88,6 +93,14 @@ const movieThis = movie => {
             console.log("Actors:  " + Actors);
         }
     );
+}
+const doThis = () => {
+    fs.readFile("random.txt", "utf8", function(err, data){
+        // console.log(data);
+        let info = data.split(", ");
+        // console.log(info);
+        runCommand(info[0], info[1]);
+    });
 }
 
 // Prompt the user to provide command
