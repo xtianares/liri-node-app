@@ -8,9 +8,6 @@ let keys = require("./keys.js"),
     inquirer = require('inquirer'), // will use this it ask for user input
     fs = require('fs'); // will use this o log user input history to a file
 
-let userCommand = "",
-    commandInfo = "";
-
 // main function to determine what he user is asking for
 const runCommand = (userCommand, commandInfo) => {
     switch (userCommand){
@@ -113,13 +110,11 @@ inquirer.prompt([
 ])
 .then(function(response) {
     // console.log(response.command);
-
-    let userInput = response.command.split(' ');
-    userCommand = userInput.shift();
-    commandInfo = userInput.join('+');
-
+    let userInput = response.command.split(' '),
+        userCommand = userInput.shift(),
+        commandInfo = userInput.join('+');
+        
     runCommand(userCommand, commandInfo);
-
     // console.log(userCommand);
     // console.log(commandInfo);
 });
