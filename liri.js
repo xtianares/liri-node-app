@@ -25,6 +25,11 @@ const runCommand = (userCommand, commandInfo) => {
             // console.log(commandInfo);
             spotifyThis(commandInfo);
             break;
+        case 'movie-this':
+            // console.log(userCommand);
+            // console.log(commandInfo);
+            movieThis(commandInfo);
+            break;
         default:
             console.log("I don't know what you mean by that, please check the documentation.");
             break;
@@ -53,6 +58,7 @@ const concertThis = artist => {
 }
 const spotifyThis = song => {
     let query = song != "" ? song : "The Sign";
+    // note: seems like that the API cant find the song "The Sign"
     spotify.search({ type: 'track', query: query, limit: 1 })
         .then(function(response) {
             let {artists, name, preview_url, album} = response.tracks.items[0];
@@ -64,6 +70,24 @@ const spotifyThis = song => {
         .catch(function(err) {
             console.log(err);
     });
+}
+const movieThis = movie => {
+    let query = movie != "" ? movie : "Mr. Nobody";
+    let queryUrl = "http://www.omdbapi.com/?t=" + query + "&y=&plot=short&apikey=trilogy";
+    axios.get(queryUrl).then(
+        function(response) {
+            // console.log(response.data);
+            let {Title, Year, Ratings, Country, Language, Plot, Actors} = response.data;
+            console.log("Movie Title: " + Title);
+            console.log("Year Released:  " + Year);
+            console.log("IMDB Rating:  " + Ratings[0].Value);
+            console.log("Rotten Tomatoes Rating:  " + Ratings[1].Value);
+            console.log("Country:  " + Country);
+            console.log("Movie Language:  " + Language);
+            console.log("Plot:  " + Plot);
+            console.log("Actors:  " + Actors);
+        }
+    );
 }
 
 // Prompt the user to provide command
