@@ -14,7 +14,7 @@ This command will default to a predefined movie if there's no other parameter in
 **do-what-it-says**:\
 This will perform a predefined command based from the entry inside a file named random.txt
 
-### APIs in Use
+### APIs
 * http://www.artists.bandsintown.com/bandsintown-api/?locale=en
 * https://developer.spotify.com/documentation/web-api/
 * http://www.omdbapi.com/
