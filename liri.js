@@ -8,7 +8,7 @@ let keys = require("./keys.js"),
     inquirer = require('inquirer'), // will use this it ask for user input
     fs = require('fs'); // will use this o log user input history to a file
 
-// main function to determine what he user is asking for
+// main function to determine what the user is asking for
 const runCommand = (userCommand, commandInfo) => {
     switch (userCommand){
         // if user is looking for concert dates
@@ -49,18 +49,16 @@ const concertThis = artist => {
     axios.get(queryUrl).then(
         function(response) {
             let events = response.data;
+            let output = "";
             for (let i = 0; i < events.length; i++) {
-                let {venue, datetime} = events[0];
-                // Name of the venue
-                console.log('Venue: ' + venue.name);
-                // console.log("The movie's rating is: " + response.data.imdbRating);
-                // Venue location
-                console.log('Location: ' + venue.city + ', ' + venue.country);
-                // Date of the Event (use moment to format this as "MM/DD/YYYY")
-                console.log('Date: ' + moment(events[0].datetime).format("MM/DD/YYYY"));
-                // adding line
-                console.log('---------------------');
+                let {venue, datetime} = events[i];
+                output += "Venue: " + venue.name + "\n" +
+                            "Location: " + venue.city + ", " + venue.country + "\n" +
+                            "Date: " + moment(events[i].datetime).format("MM/DD/YYYY") + "\n" +
+                            "------------------------------" + "\n";
             }
+            console.log(output);
+            logIt(output);
         }
     );
 }
@@ -70,10 +68,13 @@ const spotifyThis = song => {
     spotify.search({ type: 'track', query: query, limit: 1 })
         .then(function(response) {
             let {artists, name, preview_url, album} = response.tracks.items[0];
-            console.log("Artist: " + artists[0].name);
-            console.log("Song Title: " + name);
-            console.log("Preview: " + preview_url);
-            console.log("Album: " + album.name);
+            let output = "Artist: " + artists[0].name + "\n" +
+                        "Song Title: " + name + "\n" +
+                        "Preview: " + preview_url + "\n" +
+                        "Album: " + album.name;
+
+            console.log(output);
+            logIt(output);
         })
         .catch(function(err) {
             console.log(err);
@@ -86,14 +87,17 @@ const movieThis = movie => {
         function(response) {
             // console.log(response.data);
             let {Title, Year, Ratings, Country, Language, Plot, Actors} = response.data;
-            console.log("Movie Title: " + Title);
-            console.log("Year Released:  " + Year);
-            console.log("IMDB Rating:  " + Ratings[0].Value);
-            console.log("Rotten Tomatoes Rating:  " + Ratings[1].Value);
-            console.log("Country:  " + Country);
-            console.log("Movie Language:  " + Language);
-            console.log("Plot:  " + Plot);
-            console.log("Actors:  " + Actors);
+            let output = "Movie Title: " + Title + "\n" +
+                        "Year Released: " + Year + "\n" +
+                        "IMDB Rating: " + Ratings[0].Value + "\n" +
+                        "Rotten Tomatoes Rating: " + Ratings[1].Value + "\n" +
+                        "Country: " + Country + "\n" +
+                        "Movie Language: " + Language + "\n" +
+                        "Plot: " + Plot + "\n" +
+                        "Actors: " + Actors;
+
+            console.log(output);
+            logIt(output);
         }
     );
 }
@@ -128,7 +132,7 @@ inquirer.prompt([
     // console.log(response.command);
     let userInput = response.command.split(' '),
         userCommand = userInput.shift(),
-        commandInfo = userInput.join('+');
+        commandInfo = userInput.join(' ');
 
     runCommand(userCommand, commandInfo);
     // console.log(userCommand);
