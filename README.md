@@ -25,7 +25,7 @@ This will perform a predefined command based from the entry inside a file called
 **Logging Command**\
 Anything that you enter as a command will be logged into the log.txt file
 
-![command logging](log.gif)
+![command logging](logs.gif)
 
 ### APIs
 * http://www.artists.bandsintown.com/bandsintown-api/?locale=en
