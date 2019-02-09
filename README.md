@@ -2,6 +2,8 @@
 A SIRI wanna be node application. This is a command line application that takes in user input (commands) and returns information about the command query (parameters) from the corresponding API.
 
 ### Commands and Parameters
+To start application run "node liri" without the quotes, once it's running you can use the commands below:
+
 **concert-this**:\
 This command can be called like so "concert-this korn", this will return a list of events with details for the band called Korn.
 
