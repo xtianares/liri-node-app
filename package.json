@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/xtianares/liri-node-app#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "dotenv": "^6.2.0",
     "inquirer": "^6.2.2",
     "moment": "^2.24.0",
